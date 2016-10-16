@@ -73,7 +73,7 @@ def lsPath(path=os.path.abspath('.')):
     return table
 
 
-if __name__ == '__main__':
+def run():
     if len(sys.argv) == 2:
         print lsPath(sys.argv[1])
     else:

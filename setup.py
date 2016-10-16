@@ -7,7 +7,7 @@ lst
 
 # or
 
-lst.py
+lst <path>
 """
 
 setup(name = 'lst',
@@ -18,7 +18,9 @@ setup(name = 'lst',
       author_email = 'i@cxl.im',
       url = 'https://github.com/imcxl/lst',
       license = 'MIT',
-      install_requires = [],
+      install_requires = [
+        'Pylsy>=2.71'
+      ],
       classifiers = [
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
@@ -38,4 +40,7 @@ setup(name = 'lst',
       keywords = 'ls, lst',
       packages = find_packages('src'),
       package_dir = {'':'src'},
+      entry_points={
+        'console_scripts': ['lst=lst:run']
+    },
 )
