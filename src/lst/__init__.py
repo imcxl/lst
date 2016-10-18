@@ -14,8 +14,8 @@ Usage:
 import sys  
 reload(sys)  
 sys.setdefaultencoding('utf8')  
-from pylsy import pylsytable
 
+from pylsy import pylsytable
 import os
 import time
 import stat
@@ -61,16 +61,21 @@ def lsPath(path=os.path.abspath('.')):
     table.add_data("Create", [])
     table.add_data("Modify", [])
 
-    files = os.listdir(path)      
-    for f in files:
-        table.append_data("Name", [f])
-        stat = os.stat(os.path.join(path, f))
-        table.append_data("Mode",[modeFormat(stat.st_mode)])
-        table.append_data("Size",[sizeFormat(stat.st_size)])
-        table.append_data("Create",[timeFormat(stat.st_ctime)])
-        table.append_data("Modify",[timeFormat(stat.st_mtime)])
+    path = path.decode('utf-8')
 
-    return table
+    if os.path.isdir(path):
+        files = os.listdir(path)      
+        for f in files:
+            table.append_data("Name", [f])
+            stat = os.stat(os.path.join(path, f))
+            table.append_data("Mode",[modeFormat(stat.st_mode)])
+            table.append_data("Size",[sizeFormat(stat.st_size)])
+            table.append_data("Create",[timeFormat(stat.st_ctime)])
+            table.append_data("Modify",[timeFormat(stat.st_mtime)])
+
+        return table
+    else :
+        return "The path is not correct, please check it ！"
 
 
 def run():
@@ -78,3 +83,6 @@ def run():
         print lsPath(sys.argv[1])
     else:
         print lsPath()
+
+
+#print lsPath("E:\\")
